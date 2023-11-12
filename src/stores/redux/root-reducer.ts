@@ -6,4 +6,4 @@ export const rootReducer = combineReducers({
   todos: todosReducers,
 });
 
-export type RootReducer = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof rootReducer>;
