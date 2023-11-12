@@ -1,36 +1,32 @@
-import {
-  ADD_TODO,
-  REMOVE_TODO,
-  UPDATE_STATUS,
-} from "../todos-actions/todos-actions";
+import { TODO_ACTIONS } from "@/types/enum/todo-actions";
+import { Todo } from "@/types/todo";
 
-interface Todo {
-  id: string;
-  text: string;
-  completed: boolean;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-interface Action<T = any> {
+interface PayloadAction<T> {
   type: string;
   payload: T;
 }
 
-export const todosReducers = (state: Todo[] = [], action: Action) => {
-  switch (action.type) {
-    case ADD_TODO:
+export const todosReducers = (
+  state: Todo[] = [],
+  { type, payload }: PayloadAction<Todo>
+) => {
+  switch (type) {
+    case TODO_ACTIONS.ADD_TODO:
       return state.concat({
-        id: action.payload.id,
-        text: action.payload.text,
+        id: payload.id,
+        text: payload.text,
         completed: false,
       });
 
-    case REMOVE_TODO:
-      return state.filter((todo) => todo.id !== action.payload);
+    case TODO_ACTIONS.REMOVE_TODO:
+      if (typeof payload === "string") {
+        return state.filter((todo) => todo.id !== payload);
+      }
+      return state;
 
-    case UPDATE_STATUS:
+    case TODO_ACTIONS.UPDATE_STATUS:
       return state.map((todo) => {
-        if (todo.id !== action.payload.id) return todo;
+        if (todo.id !== payload.id) return todo;
 
         return { ...todo, completed: !todo.completed };
       });

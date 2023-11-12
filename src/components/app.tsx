@@ -1,4 +1,4 @@
-import { Todos } from "./todos/todos";
+import { Todos } from "@/components/todos/todos";
 
 export const App = () => {
   return <Todos />;
