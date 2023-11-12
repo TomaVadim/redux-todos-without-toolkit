@@ -1,10 +1,5 @@
 import { TODO_ACTIONS } from "@/types/enum/todo-actions";
-
-interface Todo {
-  id: string;
-  text: string;
-  completed: boolean;
-}
+import { Todo } from "@/types/todo";
 
 interface PayloadAction<T> {
   type: string;
@@ -24,7 +19,10 @@ export const todosReducers = (
       });
 
     case TODO_ACTIONS.REMOVE_TODO:
-      return state.filter((todo) => todo.id !== payload.id);
+      if (typeof payload === "string") {
+        return state.filter((todo) => todo.id !== payload);
+      }
+      return state;
 
     case TODO_ACTIONS.UPDATE_STATUS:
       return state.map((todo) => {

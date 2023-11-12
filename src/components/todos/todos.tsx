@@ -33,10 +33,10 @@ export const Todos = () => {
       </div>
 
       <ul style={{ maxWidth: "300px", margin: "0 auto" }}>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            {todo.text}
-            <button onClick={() => handleDeleteTodo(todo.id)}>delete</button>
+        {todos.map(({ id, text }) => (
+          <li key={id}>
+            {text}
+            <button onClick={() => handleDeleteTodo(id)}>delete</button>
           </li>
         ))}
       </ul>
