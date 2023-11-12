@@ -1,20 +1,18 @@
 import { nanoid } from "nanoid";
 
-export const ADD_TODO = "ADD_TODO";
-export const REMOVE_TODO = "REMOVE_TODO";
-export const UPDATE_STATUS = "UPDATE_STATUS";
+import { TODO_ACTIONS } from "@/types/enum/todo-actions";
 
 export const addTodo = (text: string) => ({
-  type: ADD_TODO,
+  type: TODO_ACTIONS.ADD_TODO,
   payload: { text, id: nanoid() },
 });
 
 export const removeTodo = (id: string) => ({
-  type: REMOVE_TODO,
+  type: TODO_ACTIONS.REMOVE_TODO,
   payload: id,
 });
 
 export const updateStatus = (id: string) => ({
-  type: UPDATE_STATUS,
+  type: TODO_ACTIONS.UPDATE_STATUS,
   payload: id,
 });
